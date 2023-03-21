@@ -10,7 +10,6 @@
 <body>
     <div id="app">
         <div>{{name}}</div>
-        <div v-text="type + ' Yuanfa'"></div>
         <div v-text="name"></div>
         <div v-html="name"></div>
     </div>
@@ -18,8 +17,7 @@
         var vm = new Vue({
             el: "#app",
             data: {
-                name: "<h1>Dell</h1>",
-                type: "Jia"
+                name: "<h1>Dell</h1>"
             }
         })
     </script>
