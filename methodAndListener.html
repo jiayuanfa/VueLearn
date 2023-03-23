@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性、方法、监听器</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div v-text="fullName"></div>
+        <!-- <div v-text="fullName()"></div>
+        <div v-text="age"></div> -->
+    </div>
+    <script>
+        var vm = new Vue( {
+            el: "#app",
+            data: {
+                firstName: "Jia",
+                lastName: "Yuanfa",
+                fullName: "Jia Yuanfa",
+                age: 28
+            },
+            // 计算属性
+            // 有缓存，性能更好，只会在变量发生改变的时候去重新计算
+            computed: {
+                fullName: function() {
+                    console.log("计算了一次")
+                    return this.firstName + " " + this.lastName
+                }
+            },
+            // 方法
+            // 也可以实现这样的属性，但是没有缓存，因为页面每次渲染就会调用一次，就会执行一次
+            methods: {
+                fullName: function() {
+                    return this.firstName + " " + this.lastName
+                }
+            },
+            // 侦听器 监听某个值发生改变的时候做一些事情
+            // 也是提升性能的一种办法
+            watch: {
+                firstName: function() {
+                    this.fullName = this.firstName + " " + this.lastName;
+                },
+                lastName: function() {
+                    this.fullName = this.firstName + " " + this.lastName
+                }
+            }
+        })
+    </script>
+</body>
+</html>

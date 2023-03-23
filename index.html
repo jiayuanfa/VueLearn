@@ -1,27 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>模板语法</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue中的列表渲染</title>
     <script src="./vue.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div id="app">
-        <div>{{name}}</div>
-        <div v-text="type + ' Yuanfa'"></div>
-        <div v-text="name"></div>
-        <div v-html="name"></div>
+      <!-- 基础的列表循环 -->
+      <div v-for="item of list">{{item}}</div>
     </div>
     <script>
-        var vm = new Vue({
-            el: "#app",
-            data: {
-                name: "<h1>Dell</h1>",
-                type: "Jia"
-            }
-        })
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          list: ["hello", "dell", "nice", "to", "meet", "you"],
+        },
+      });
     </script>
-</body>
+  </body>
 </html>
