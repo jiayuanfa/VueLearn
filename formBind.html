@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue中的表单绑定</title>
+    <title>Vue中的表单绑定的种种</title>
     <script src="./vue.js"></script>
 </head>
 <body>
 
-    <!-- 输入框 -->
-    <!-- checkbox -->
-    <!-- 单选框+内容 -->
-    <!-- 选择器+内容 -->
     <div id="root">
 
+        <!-- 输入框 -->
         <!-- <input v-model="value"/>
         {{value}} -->
 
+        <!-- checkbox -->
         <!-- <input type="checkbox" v-model="value"/>
         {{value}} -->
 
+        <!-- 单选框+内容 -->
         <!-- <input type="radio" value="test" v-model="value"/>
         {{value}} -->
 
+        <!-- 选择器+内容 -->
         <!-- <select v-model="value">
             <option disabled>--请选择--</option>
             <option value='1'>A</option>
@@ -40,7 +40,8 @@
         <!-- <input type="text" v-model.number="value"/>
         {{value}} -->
 
-        <input type="text" v-model="value"/>
+        <!-- 帮助我们去掉input输入框前后多余的空格 -->
+        <input type="text" v-model.trim="value"/>
         {{value}}
 
     </div>

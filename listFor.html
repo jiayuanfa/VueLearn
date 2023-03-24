@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue中的列表渲染</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 基础的列表循环 -->
+      <!-- 如何让页面的性能达到最优？就是尽量不要使用index作为key值，而是要使用数据id -->
+      <template v-for="(item, index) of list">
+           <div :key="item.id">
+            {{item.text}}----{{index}}
+           </div>
+           <span>
+            {{item.text}}
+           </span>
+        </template>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          list: [{
+            id: "0101321",
+            text: "Hello"
+          }, {
+            id: "0101322",
+            text: "Dell"
+          }, {
+            id: "0101323",
+            text: "Lee"
+          }],
+        },
+      });
+    </script>
+  </body>
+</html>

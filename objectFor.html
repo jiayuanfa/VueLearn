@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue中的列表渲染</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 基础的列表循环-对象循环 -->
+        <div v-for="item of userInfo">
+            {{item}}
+        </div>
+
+        <div v-for="(item, key, index) of userInfo">
+            {{item}}----{{key}}----{{index}}
+        </div>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: "#app",
+        data: {
+          userInfo: {
+            name: "Dell",
+            age: 28,
+            gender: "male",
+            salary: "secret"
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

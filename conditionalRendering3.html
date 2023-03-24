@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue的条件渲染-dom元素添加key值防止被复用</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 当你把页面上的dom元素加上一个key值的时候，Vue就会知道它是唯一的元素，就不会帮你在其他的同类型的元素复用它 -->
+        <div v-if="show">
+            用户名：<input key="userName"/>
+        </div>
+        <div v-else>
+            邮箱名：<input key="password"/>
+        </div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                show: false,
+            }
+        })
+    </script>
+</body>
+</html>

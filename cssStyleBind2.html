@@ -24,11 +24,11 @@
         var vm = new Vue({
             el: "#app",
             data: {
-                isActivated: ""
+                activated: ""
             },
             methods: {
                 handleDivClick: function() {
-                    this.isActivated = "activated";
+                    this.activated = this.activated === "activated"? "" : "activated"
                 }
             }
         })
