@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件使用中的细节点</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <div ref='hello' @click="handleClick">
+            hello world
+        </div>
+    </div>
+    <script>
+
+        // 通过指定ref获取dom组件内容
+        var vm = new Vue({
+            el: '#root',
+            methods: {
+                handleClick: function() {
+                    alert(this.$refs.hello.innerHTML)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -4,55 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue中的表单绑定</title>
+    <title>组件使用中的细节点</title>
     <script src="./vue.js"></script>
 </head>
 <body>
-
-    <!-- 输入框 -->
-    <!-- checkbox -->
-    <!-- 单选框+内容 -->
-    <!-- 选择器+内容 -->
     <div id="root">
-
-        <!-- <input v-model="value"/>
-        {{value}} -->
-
-        <!-- <input type="checkbox" v-model="value"/>
-        {{value}} -->
-
-        <!-- <input type="radio" value="test" v-model="value"/>
-        {{value}} -->
-
-        <!-- <select v-model="value">
-            <option disabled>--请选择--</option>
-            <option value='1'>A</option>
-            <option value='2'>B</option>
-            <option value='3'>C</option>
-        </select>
-        {{value}} -->
-
-        <!-- 不实时更新数据使用lazy，而是失去焦点的时候修改数据，提高表单填写的性能 -->
-        <!-- <input type="text" v-model.lazy="value"/>
-        {{value}} -->
-
-        
-        <!-- <input type="text" v-model.number="value"/>
-        {{value}} -->
-
-        <input type="text" v-model="value"/>
-        {{value}}
-
+        <counter ref="one" @change="handleChange"></counter>
+        <counter ref="two" @change="handleChange"></counter>
+        <div>{{total}}</div>
     </div>
     <script>
-        new Vue({
-            el: "#root",
-            data: {
-                value: ""
+
+        Vue.component('counter', {
+            template: '<div @click="handleClick">{{number}}</div>',
+            data: function() {
+                return {
+                    number: 0
+                }
             },
-            watch: {
-                value: function() {
-                    console.log(typeof this.value)
+            methods: {
+                handleClick: function() {
+                    this.number ++ 
+                    this.$emit('change')
+                }
+            }
+        })
+
+        // 通过指定ref获取dom组件内容
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                total: 0
+            },
+            methods: {
+                handleChange: function() {
+                    this.total = this.$refs.one.number + this.$refs.two.number 
                 }
             }
         })

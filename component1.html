@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件使用中的细节点</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+
+        <!-- 使用is=来解决table组件解析xml层级错乱的bug -->
+        <table>
+            <tbody>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+
+        // 子组件里面的data需要声明为函数
+        // 之所以这么做，是因为一个子组件，不像是根组件，只会被初始化一次。
+        // 就像上面被调用了三次，那么我每一个子组件的数据都不希望和其他组件的数据产生冲突
+        // 每一个子组件都想拥有自己的数据，而不应该共享一套数据
+        // 那么通过一个函数来返回对象的目的，就是为了让每一个子组件都拥有自己的独立存储
+        // 这样的话，就不会出现多个子组件之间互相影响的情况
+        Vue.component('row', {
+            data: function() {
+                return {
+                    content: 'this is content'
+                }
+            },
+            template: '<tr><td>{{content}}</td></tr>'
+        })
+        var vm = new Vue({
+            el: '#root'
+        })
+    </script>
+</body>
+</html>
