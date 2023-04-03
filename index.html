@@ -4,43 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>组件使用中的细节点</title>
+    <title>Vue中的作用域插槽</title>
     <script src="./vue.js"></script>
 </head>
 <body>
     <div id="root">
-        <counter ref="one" @change="handleChange"></counter>
-        <counter ref="two" @change="handleChange"></counter>
-        <div>{{total}}</div>
+
+        <!-- 首先父组件调用子组件的时候 -->
+        <!-- 给子组件传入了一个插槽 -->
+        <!-- 声明我要从子组件接收的数据都放在props里面 -->
+        <!-- 然后声明展示props内容的样式，我这里为<h1>标签的形式 -->
+        <child>
+            <template slot-scope="props">
+                <!-- 父组件接收到数据之后使用 -->
+                <h1>{{props.item}}</h1>
+            </template>
+        </child>
     </div>
     <script>
 
-        Vue.component('counter', {
-            template: '<div @click="handleClick">{{number}}</div>',
+        Vue.component('child', {
             data: function() {
                 return {
-                    number: 0
+                    list: [1, 2, 3, 4]
                 }
             },
-            methods: {
-                handleClick: function() {
-                    this.number ++ 
-                    this.$emit('change')
-                }
-            }
+
+            // 子组件通过以下的方式传递数据，给父组件
+            template: `<div>
+                        <ul>
+                            <slot v-for="item of list"
+                                  :item=item
+                            >
+                            </slot>
+                        </ul>
+                      </div>`
         })
 
-        // 通过指定ref获取dom组件内容
         var vm = new Vue({
-            el: '#root',
-            data: {
-                total: 0
-            },
-            methods: {
-                handleChange: function() {
-                    this.total = this.$refs.one.number + this.$refs.two.number 
-                }
-            }
+            el: "#root"
         })
     </script>
 </body>

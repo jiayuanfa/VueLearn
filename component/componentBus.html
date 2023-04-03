@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>非父子组件间的传值问题</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+
+    <!-- 使用总线机制来解决（Bus/总线/发布订阅模式/观察者模式） -->
+    <!-- 使用VueX组件来解决 -->
+    <div id="root">
+        <child content="Dell"></child>
+        <child content="Lee"></child>
+    </div>
+    <script>
+
+        // 给Vus挂载一个bus属性
+        Vue.prototype.bus = new Vue()
+
+        Vue.component('child', {
+
+            // 重写一个selfContent属性，以方便单向数据流修改不报错
+            data: function() {
+                return {
+                    selfContent: this.content
+                }
+            },
+            props: {
+                content: String
+            },
+
+            // 给组件绑定click事件
+            template: '<div @click="handleClick">{{selfContent}}</div>',
+
+            // 点击click事件的时候，由bus发射出去
+            methods: {
+                handleClick: function() {
+                    this.bus.$emit('change', this.selfContent)
+                }
+            },
+            mounted: function() {
+                var this_ = this
+                // 组件中bus监听change方法，把点击的组件的内容传递出去给外界
+                this.bus.$on('change', function(msg) {
+                    this_.selfContent = msg
+                })
+            }
+        })
+
+        var vm = new Vue({
+            el: "#root"
+        })
+    </script>
+</body>
+</html>

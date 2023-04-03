@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父子组件传值</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <counter @change="handleAdd" :count="0"></counter>
+        <counter @change="handleAdd" :count="0"></counter>
+        <div>{{total}}</div>
+    </div>
+    <script>
+
+        var counter = {
+            props: ['count'],
+            data: function() {
+                return {
+                    number: this.count
+                }
+            },
+            template: '<div @click="handleClick">{{number}}</div>',
+            methods: {
+                handleClick: function() {
+                    this.number ++
+                    this.$emit('change', 1)
+                }
+            }
+        }
+
+        // 父组件通过属性向子组件传值
+        // 修改值：单向数据流
+        // 也就是子组件不能直接修改父组件的的数据，因为组件有可能被多个地方引用
+        // 正确方式：通过data把父组件传递过来数据重新赋值一个变量来实现对自己变量的修改
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                total: 0
+            },
+            components: {
+                counter: counter
+            },
+            methods: {
+                handleAdd: function(step) {
+                    this.total += step
+                }
+            }
+        })
+    </script>
+</body>
+</html>
