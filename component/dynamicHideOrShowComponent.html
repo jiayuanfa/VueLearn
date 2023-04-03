@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>动态组件与v-once指令</title>
+    <title>Vue动态展示或者隐藏组件怎么写？</title>
     <script src="./vue.js"></script>
 </head>
 <body>
-    <!-- v-once指的是我只渲染一次，你后面数据即便是改变了我也不渲染了 -->
-    <div id="root" v-once>
-        <!-- <component :is="type"></component> -->
-        
+    <div id="root">
+        <child-one v-if="type === 'child-one'"></child-one>
+        <child-two v-if="type === 'child-two'"></child-two>
+        <button @click="handleBtnClick">change</button>
     </div>
     <script>
 
@@ -26,17 +26,9 @@
             data: {
                 type: 'child-one'
             },
-            template:`
-                <div v-once>
-                    <child-one v-if="type === 'child-one'"></child-one>
-                    <child-two v-if="type === 'child-two'"></child-two>
-                    <button @click="handleBtnClick">change</button>
-                </div>
-            `,
             methods: {
                 handleBtnClick: function() {
-                    this.type = this.type === 'child-one' ? 
-                    'child-two' : 'child-one'
+                    this.type = this.type === 'child-one' ? 'child-two' : 'child-one'
                 }
             }
         })

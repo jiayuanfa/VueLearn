@@ -18,3 +18,5 @@
 - 组件与组件之间的通信 使用bus
 - slot插槽的使用
 - Vue作用域插槽的使用方法
+- Vue动态展示或者隐藏组件的第一种写法 （dynamicHideOrShowComponent.html）
+- v-once只渲染一次指令的用法
