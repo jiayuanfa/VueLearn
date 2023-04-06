@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue过渡动画</title>
+    <title>Vue animate.css动画</title>
     <script src="./vue.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/animate.css">
 </head>
 <body>
     <div id="root">
         <transition 
-            enter-active-class="animated swing"
-            leave-active-class="animated shake"
+            enter-active-class="animate__animated animate__swing"
+            leave-active-class="animate__animated animate__headShake"
         >
             <div v-if="show">
                 hello world
