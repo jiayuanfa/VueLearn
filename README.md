@@ -30,3 +30,4 @@
 - keyFrame动画的编写方式
 - animate.css动画
 - Vue animate.css动画和过渡动画结合使用的例子
+- Vue多个元素之间动画切换效果

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue中多个组件之间的过渡</title>
+    <title>Vue中多个元素或者组件之间的过渡</title>
     <script src="./vue.js"></script>
     <style>
         .v-enter, .v-leave-to {
@@ -19,26 +19,25 @@
     <div id="root">
         <!-- 给transition设置Mode 先隐藏再显示 解决占位问题 -->
         <transition mode="out-in">
-            <component :is="type"></component>
+            <!-- 给每个div一个key值，防止div被复用的时候导致动画不起作用 -->
+            <div v-if="show" key="hello">
+                <h1>Hello World</h1>
+            </div>
+            <div v-else key="bye">
+                <h1>Bye World</h1>
+            </div>
         </transition>
         <button @click="handleClick">toggle</button>
     </div>
     <script>
-
-        Vue.component('child', {
-            template: '<div><h1>child</h1></div>'
-        })
-        Vue.component('child-one', {
-            template: '<div><h1>child-one</h1></div>'
-        })
         var vm = new Vue({
             el: "#root",
             data: {
-                type: 'child'
+                show: true 
             },
             methods: {
                 handleClick: function() {
-                    this.type = this.type === 'child' ? 'child-one' : 'child'
+                    this.show = !this.show 
                 },
             }
         })
