@@ -26,3 +26,7 @@
 - v-once只渲染一次指令的用法
 
 # 动画
+- 过渡动画的编写方式
+- keyFrame动画的编写方式
+- animate.css动画
+- Vue animate.css动画和过渡动画结合使用的例子

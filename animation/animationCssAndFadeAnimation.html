@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue animate.css动画和过渡动画结合使用的例子</title>
+    <script src="./vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/animate.css">
+
+    <!-- 过渡动画效果 -->
+    <style>
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity 3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <!-- appear appear-active-class 实现页面的初始动画 -->
+        <!-- 时间上以transition的动画时长为准 -->
+        <!-- :duration 自定义动画时长 -->
+        <transition 
+            :duration="{enter:4000, leave:3000}"
+            type="transition"
+            name="fade"
+            appear
+            enter-active-class="animate__animated animate__swing fade-enter-active"
+            leave-active-class="animate__animated animate__headShake fade-leave-active"
+            appear-active-class="animate__animated animate__swing"
+        >
+            <div v-if="show">
+                <h1>Hello World</h1>
+            </div>
+        </transition>
+        <button @click="handleClick">toggle</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#root",
+            data: {
+                show: true 
+            },
+            methods: {
+                handleClick: function() {
+                    this.show = !this.show 
+                }
+            }
+        })
+    </script>
+</body>
+</html>

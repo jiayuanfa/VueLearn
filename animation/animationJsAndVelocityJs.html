@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue中的JS动画与Velocity.js</title>
     <script src="./vue.js"></script>
-    <script src="./js/velocity.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/animate.css">
-
 </head>
 <body>
     <div id="root">
@@ -35,18 +33,18 @@
                     this.show = !this.show 
                 },
                 handleBeforeEnter: function(el) {
-                    el.style.opacity = 0;
+                    el.style.color = 'red'
                 },
                 handleEnter: function(el, done) {
-                   Velocity(el, {
-                    opacity: 1
-                 }, {
-                    duration: 1000,
-                    complete: done
-                 })
+                    setTimeout(() => {
+                        el.style.color = 'green'
+                    }, 2000)
+                    setTimeout(() => {
+                        done()
+                    }, 4000)
                 },
                 handleAfterEnter: function(el) {
-                    console.log("动画结束")
+                    el.style.color = "#000"
                 }
             }
         })
