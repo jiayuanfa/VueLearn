@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <body-content>
+            <!-- 给div起一个插槽名字，方便下方使用 -->
+            <!-- 具名插槽 -->
+            <!-- <div class="header" slot="header">header</div> -->
+            <div class="footer" slot="footer">footer</div>
+        </body-content>
+    </div>
+    <script>
+
+        // 通过slot插槽来插入模块
+        // 第二种方式，可以直接在slot内部写内容，添加Header
+        Vue.component('body-content', {
+            template: `<div>
+                            <slot name='header'>
+                                <h1>default header</h1>
+                            </slot>
+                            <div class='content'>content</div>
+                            <slot name='footer'></slot>
+                        </div>`
+        })
+        var vm = new Vue({
+            el: "#root"
+        })
+    </script>
+</body>
+</html>
