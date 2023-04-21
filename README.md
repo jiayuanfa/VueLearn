@@ -33,3 +33,4 @@
 - Vue多个元素之间动画切换效果
 - Vue多个组件之间动画切换效果的实现
 - Vue中的列表过渡动画效果
+- Vue中的动画封装animationEncapsulation.html
